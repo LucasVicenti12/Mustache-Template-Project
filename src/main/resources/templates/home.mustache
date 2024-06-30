@@ -1,0 +1,44 @@
+{{>header}}
+<div class="d-flex justify-content-center w-100">
+    <div class="w-100 m-5 border rounded d-flex flex-column justify-content-center">
+        <div class="d-flex justify-content-center position-relative">
+            <div class="h4 text-center">Tickets</div>
+        </div>
+        <hr style="padding: 0; margin: 0">
+        <div class="p-2">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Register ticket
+            </button>
+            <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    hx-get="/getModal"
+                    hx-swap="mustache_modal"
+            >
+                Submit modal
+            </button>
+        </div>
+        <div class="container text-center">
+            <div class="row align-items-start">
+                <div class="col">
+                    Code
+                </div>
+                <div class="col">
+                    Title
+                </div>
+                <div class="col">
+                    Situation
+                </div>
+                <div class="col">
+                    Detail
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mustache_modal">
+        {{>ticket_modal}}
+    </div>
+</div>
+{{>footer}}
