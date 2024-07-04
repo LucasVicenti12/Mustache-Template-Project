@@ -10,7 +10,13 @@ import java.util.List;
 
 @RegisterBeanMapper(Ticket.class)
 public interface TicketService {
-    @SqlUpdate("CREATE TABLE IF NOT EXISTS tickets (id INT PRIMARY KEY AUTO_INCREMENT, title VARCHAR(60), description VARCHAR(200))")
+    @SqlUpdate(
+            "CREATE TABLE IF NOT EXISTS tickets (" +
+            "id INT PRIMARY KEY AUTO_INCREMENT," +
+            "title VARCHAR(60)," +
+            "description VARCHAR(200)" +
+            ")"
+    )
     void createTable();
 
     @SqlUpdate("INSERT INTO tickets (title, description) values (:title, :description)")
