@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.example.demo.config.HandleBarsConfig.hbs;
 
@@ -29,7 +31,11 @@ public class TicketController {
 
         List<Ticket> tickets = ticketService.getAllTickets();
 
-        return template.apply(tickets);
+        Map<String, Object> parameters = new HashMap<>();
+
+        parameters.put("tickets", tickets);
+
+        return template.apply(parameters);
     }
 
     @GetMapping("/getTicketByID/{id}")
