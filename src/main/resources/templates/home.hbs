@@ -16,37 +16,7 @@
                 Register ticket
             </button>
         </div>
-        <div class="container text-center">
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {{#each tickets}}
-                    <tr>
-                        <td>{{title}}</td>
-                        <td>{{description}}</td>
-                        <td>
-                            <button
-                                    class="btn btn-primary"
-                                    hx-get="/ticket/getTicketByID/{{id}}"
-                                    hx-target="#mustache_modal"
-                                    hx-trigger="click"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#ticketModel"
-                            >
-                                Edit
-                            </button>
-                        </td>
-                    </tr>
-                {{/each}}
-                </tbody>
-            </table>
-        </div>
+        {{>ticket_list}}
     </div>
     <div
             class="modal fade"

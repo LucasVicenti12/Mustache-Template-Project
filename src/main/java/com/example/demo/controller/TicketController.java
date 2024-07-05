@@ -58,29 +58,53 @@ public class TicketController {
         return template.apply(ticket);
     }
 
-    @PostMapping("/new")
+    @PostMapping("/save")
     @ResponseBody
-    public String saveTicket(HttpServletRequest request) throws Exception{
+    public String saveTicket(HttpServletRequest request) throws Exception {
         Ticket ticket = new Ticket();
 
-        if(request.getParameter("id") != null){
-            if(!request.getParameter("id").isEmpty()){
+        if (request.getParameter("id") != null) {
+            if (!request.getParameter("id").isEmpty()) {
                 ticket.setId(Long.parseLong(request.getParameter("id")));
             }
         }
-        if(request.getParameter("title") != null){
+        if (request.getParameter("title") != null) {
             ticket.setTitle(request.getParameter("title"));
         }
-        if(request.getParameter("description") != null){
+        if (request.getParameter("description") != null) {
             ticket.setDescription(request.getParameter("description"));
         }
 
-        if(ticket.getId() != null){
+        if (ticket.getId() != null) {
             ticketService.saveTicket(ticket);
-        }else{
+        } else {
             ticketService.createTicket(ticket);
         }
 
-        return "";
+        List<Ticket> tickets = ticketService.getAllTickets();
+
+        Template template = hbs().compile("ticket_list");
+
+        Map<String, Object> parameters = new HashMap<>();
+
+        parameters.put("tickets", tickets);
+
+        return template.apply(parameters);
+    }
+
+    @DeleteMapping("/deleteTicketByID/{id}")
+    @ResponseBody
+    public String deleteTicketByID(@PathVariable("id") Long id) throws Exception {
+        ticketService.deleteTicketByID(id);
+
+        List<Ticket> tickets = ticketService.getAllTickets();
+
+        Template template = hbs().compile("ticket_list");
+
+        Map<String, Object> parameters = new HashMap<>();
+
+        parameters.put("tickets", tickets);
+
+        return template.apply(parameters);
     }
 }

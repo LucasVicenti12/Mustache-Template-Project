@@ -29,4 +29,7 @@ public interface TicketService {
 
     @SqlQuery("SELECT * FROM tickets WHERE id=:id")
     Ticket getTicketByID(Long id);
+
+    @SqlUpdate("DELETE FROM tickets WHERE id=:id")
+    void deleteTicketByID(Long id);
 }
